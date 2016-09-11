@@ -12,19 +12,19 @@ trait DAO {
 }
 
 trait FileSystemDAO extends DAO {
-  lazy val airports = {
+  override lazy val airports = {
     val uri = getClass.getResource("airports.csv").toURI
     val csv = CSV.parse(uri, ',')
     csv.tail.map(Airport.fromCsv).toVector
   }
 
-  lazy val countries = {
+  override lazy val countries = {
     val uri = getClass.getResource("countries.csv").toURI
     val csv = CSV.parse(uri, ',')
     csv.tail.map(Country.fromCsv).toVector
   }
 
-  lazy val runways = {
+  override lazy val runways = {
     val uri = getClass.getResource("runways.csv").toURI
     val csv = CSV.parse(uri, ',')
     csv.tail.map(Runway.fromCsv).toVector
