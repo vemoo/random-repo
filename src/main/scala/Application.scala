@@ -1,14 +1,22 @@
 import model._
+import services._
 import util._
 
 object Application {
+
+  val svc = new SearchSvc with FileSystemDAO
+
   def main(args: Array[String]): Unit = {
-    val uri = getClass.getResource("countries.csv").toURI
-    println(uri)
-    val raw = CSV.parse(uri, ',')
-    println(Analize.findOptionals(raw))
-    val res = raw.tail.map(Country.fromCsv)
-    println(res.length)
-    println(res.last)
+    loop()
+  }
+
+  def loop(): Unit = {
+    print("Enter code: ")
+    val code = io.StdIn.readLine()
+    if (!code.isEmpty) {
+      val res = svc.findByCountryCode(code)
+      println(res)
+      loop()
+    }
   }
 }

@@ -1,4 +1,4 @@
-name := "untitled"
+name := "lunatech-assignment"
 
 version := "1.0"
 
