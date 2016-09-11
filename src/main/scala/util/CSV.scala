@@ -1,14 +1,16 @@
+package util
+
 import java.net.URI
 
 
 object CSV {
-  def parse(path: URI, delim: Char): Vector[Vector[String]] = {
+  def parse(path: URI, delim: Char): Seq[Seq[String]] = {
     io.Source.fromFile(path).getLines()
       .map(l => parseLine(l, delim))
       .toVector
   }
 
-  def parseLine(line: String, delim: Char): Vector[String] = {
+  def parseLine(line: String, delim: Char): Seq[String] = {
     val sb = new StringBuilder
     val vb = Vector.newBuilder[String]
 

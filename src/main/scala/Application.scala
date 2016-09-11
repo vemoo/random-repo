@@ -1,14 +1,14 @@
+import model._
+import util._
+
 object Application {
   def main(args: Array[String]): Unit = {
-//    val res = CSV.parseLine(
-//      """S,"Hola ""pepe,"", Mundo",E""",
-//      ',')
-//    println(res)
-//    println(res.length)
-
-    val uri = getClass().getResource("airports.csv").toURI
+    val uri = getClass.getResource("countries.csv").toURI
     println(uri)
-    val res = CSV.parse(uri, ',')
+    val raw = CSV.parse(uri, ',')
+    println(Analize.findOptionals(raw))
+    val res = raw.tail.map(Country.fromCsv)
     println(res.length)
+    println(res.last)
   }
 }

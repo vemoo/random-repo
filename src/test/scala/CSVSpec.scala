@@ -1,5 +1,5 @@
 import org.scalatest.FunSuite
-import CSV._
+import util.CSV._
 
 class CSVSpec extends FunSuite {
 
