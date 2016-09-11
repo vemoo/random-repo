@@ -2,8 +2,8 @@ package model
 
 case class Airport(id: Int, ident: String, `type`: String, name: String,
                    latitudeDeg: Double, longitudeDeg: Double, elevationFt: Option[Int],
-                   continent: String, isoCountry: String, isoRegion: String, municipality: Option[Boolean],
-                   scheduledService: String, gpsCode: Option[String], iataCode: Option[String], localCode: Option[String],
+                   continent: String, isoCountry: String, isoRegion: String, municipality: Option[String],
+                   scheduledService: Boolean, gpsCode: Option[String], iataCode: Option[String], localCode: Option[String],
                    homeLink: Option[String], wikipediaLink: Option[String], keywords: Seq[String])
 
 object Airport {
@@ -22,8 +22,8 @@ object Airport {
     val continent = vals(7)
     val isoCountry = vals(8)
     val isoRegion = vals(9)
-    val municipality = toOption(vals(10)).map(_ == "yes")
-    val scheduledService = vals(11)
+    val municipality = toOption(vals(10))
+    val scheduledService = vals(11) == "yes"
     val gpsCode = toOption(vals(12))
     val iataCode = toOption(vals(13))
     val localCode = toOption(vals(14))

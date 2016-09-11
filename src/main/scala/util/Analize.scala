@@ -5,8 +5,10 @@ package util
   * for each field
   */
 object Analize {
+
   /**
     * Finds optional fields in the csv
+    *
     * @param csv
     * @return header names of the optional fields
     */
@@ -16,5 +18,9 @@ object Analize {
       acc ++ line.zipWithIndex.filter(_._1.isEmpty).map(_._2)
     }
     indices.map(header(_))
+  }
+
+  def findRange(csv: Seq[Seq[String]], col: Int): Set[String] = {
+    csv.tail.map(l => l(col)).toSet
   }
 }
