@@ -12,16 +12,18 @@ trait SearchSvc extends DAO {
   private lazy val airportsByCountryCode =
     airports.groupBy(_.isoCountry).withDefaultValue(Seq())
 
-  def findByCountryCode(code: String): Seq[Result] = {
-    airportsByCountryCode(code)
-      .map(a => (a, runwaysByAirportRef(a.id)))
+  def findCountriesByName(name: String): Seq[Country] = {
+    val nameUpper = name.toUpperCase()
+    countries.filter(_.name.toUpperCase().startsWith(nameUpper))
   }
 
-  def findByCountryName(name: String): Seq[Result] = {
-    for {
-      country <- countries.filter(_.name == name)
-      airport <- airportsByCountryCode(country.code)
-      runways = runwaysByAirportRef(airport.id)
-    } yield (airport, runways)
+  def getCountryByCode(code: String): Option[Country] = {
+    val codeUpper = code.toUpperCase()
+    countries.find(_.code.toUpperCase() == codeUpper)
+  }
+
+  def getAirportsAndRunwaysByCountry(country: Country): Seq[Result] = {
+    airportsByCountryCode(country.code)
+      .map(a => (a, runwaysByAirportRef(a.id)))
   }
 }
