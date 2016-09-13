@@ -14,7 +14,7 @@ object Country {
     val name = vals(2)
     val continent = vals(3)
     val wikiLink = vals(4)
-    val keywords = vals(5).split(',').toVector
+    val keywords = toSeq(vals(5))
 
     Country(id, code, name, continent, wikiLink, keywords)
   }

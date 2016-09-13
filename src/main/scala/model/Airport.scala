@@ -29,7 +29,7 @@ object Airport {
     val localCode = toOption(vals(14))
     val homeLink = toOption(vals(15))
     val wikiLink = toOption(vals(16))
-    val keywords = vals(17).split(',').toVector
+    val keywords = toSeq(vals(17))
 
     Airport(
       id, ident, `type`, name, lat, lon, elevation,
