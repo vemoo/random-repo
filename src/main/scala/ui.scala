@@ -51,8 +51,8 @@ package object ui {
       seq.map(st.show).mkString("\n")
   }
 
-  implicit def genShow[T] = new Show[T] {
-    def show(t: T): String = t.toString
+  implicit def stringShow = new Show[String] {
+    def show(str: String): String = str
   }
 
 
