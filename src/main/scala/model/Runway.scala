@@ -2,13 +2,13 @@ package model
 
 import util.Convert._
 
-case class DontKnow(ident: String, latitudeDeg: Option[Double], longitudeDeg: Option[Double],
-                    elevationFt: Option[Int], headingDegT: Option[Double],
-                    displacedThresholdFt: Option[Int])
+case class RunwayDetail(ident: String, latitudeDeg: Option[Double], longitudeDeg: Option[Double],
+                        elevationFt: Option[Int], headingDegT: Option[Double],
+                        displacedThresholdFt: Option[Int])
 
-object DontKnow {
+object RunwayDetail {
 
-  def fromCsv(vals: Seq[String]): DontKnow = {
+  def fromCsv(vals: Seq[String]): RunwayDetail = {
 
     val ident = vals(0)
     val lat = toOption(vals(1)).map(_.toDouble)
@@ -17,13 +17,13 @@ object DontKnow {
     val heading = toOption(vals(4)).map(_.toDouble)
     val displacedThres = toOption(vals(5)).map(_.toInt)
 
-    DontKnow(ident, lat, lon, elevation, heading, displacedThres)
+    RunwayDetail(ident, lat, lon, elevation, heading, displacedThres)
   }
 }
 
 case class Runway(id: Int, airportRef: Int, airportIdent: String,
                   lengthFt: Option[Int], widthFt: Option[Int], surface: Option[String],
-                  lighted: Boolean, closed: Boolean, le: DontKnow, he: DontKnow)
+                  lighted: Boolean, closed: Boolean, le: RunwayDetail, he: RunwayDetail)
 
 object Runway {
 
@@ -37,8 +37,8 @@ object Runway {
     val surface = toOption(vals(5))
     val lighted = vals(6) == "1"
     val closed = vals(7) == "1"
-    val le = DontKnow.fromCsv(vals.slice(8, 14))
-    val he = DontKnow.fromCsv(vals.slice(14, 20))
+    val le = RunwayDetail.fromCsv(vals.slice(8, 14))
+    val he = RunwayDetail.fromCsv(vals.slice(14, 20))
 
     Runway(id, airportRef, airportIdent, length, width,
       surface, lighted, closed, le, he)

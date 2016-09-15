@@ -27,7 +27,7 @@ class SearchSvcSpec extends AsyncFunSuite {
     }
 
     private def testRunWay(id: Int, airportId: Int) = {
-      val dn = DontKnow("XX", None, None, None, None, None)
+      val dn = RunwayDetail("XX", None, None, None, None, None)
       Runway(id, airportId, "XX", None, None, None, false, false, dn, dn)
     }
 
