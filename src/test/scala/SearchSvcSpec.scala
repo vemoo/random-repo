@@ -56,8 +56,8 @@ class SearchSvcSpec extends AsyncFunSuite {
     }
   }
 
-  test("Find by code shol be case insesitive") {
-    svc.getCountryByCode("CH").map { country =>
+  test("Find by code should be case insesitive") {
+    svc.getCountryByCode("ch").map { country =>
       val name = country.map(_.name)
       assert(name.contains("Switzerland"))
     }
